@@ -1,9 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "./components/ui/separator";
 import { Textarea } from "./components/ui/textarea";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "./components/ui/select";
+import { Slider } from "./components/ui/slider";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "./components/ui/select";
 import { Label } from "./components/ui/label";
-import { Github, FileVideo, Upload } from "lucide-react";
+import { Github, FileVideo, Upload, Wand2 } from "lucide-react";
 
 function App() {
   return (
@@ -51,7 +58,7 @@ function App() {
           </p>
         </div>
 
-        <aside className="w-80 space-y-6">
+        <aside className="w-80 space-y-4">
           <form className="space-y-6">
             {/* A label quando tem o htmlFor pro input, podemos clicar nela para clicar no input (trigger) */}
             <label
@@ -87,7 +94,21 @@ function App() {
 
           <Separator />
 
-          <form className="space-y-6">
+          <form className="space-y-4">
+            <div className="space-y-2">
+                <Label>Promp</Label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder='Selecione um prompt...'/>
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectItem value="title">Título do YouTube</SelectItem>
+                    <SelectItem value="description">Descrição do YouTube</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
             <div className="space-y-2">
               <Label>Modelo</Label>
               <Select disabled defaultValue="gpt3.5">
@@ -99,9 +120,31 @@ function App() {
                   <SelectItem value="gpt3.5">GPT 3.5-turbo 16k</SelectItem>
                 </SelectContent>
               </Select>
+              <span className="block text-xs text-muted-foreground italic">
+                Você poderá customizar essa opção em breve...
+              </span>
             </div>
-          </form>
 
+            <Separator />
+
+
+            <div className="space-y-4">
+              <Label>Temperatura</Label>
+              
+              <Slider min={0} max={1} step={0.1} />
+              
+              <span className="block text-xs text-muted-foreground italic">
+                Valores mais altos tendem a deixar o resultado mais criativo, mas com possíveis erros.
+              </span>
+            </div>
+
+            <Separator />
+
+            <Button type="submit" className="w-full">
+              Executar
+              <Wand2 className="w-4 h-4 ml-2" />
+            </Button>
+          </form>
         </aside>
       </main>
     </div>
